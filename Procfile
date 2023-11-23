@@ -1,1 +1,1 @@
-web: gunicorn user-login.wsgi
+web: gunicorn codestar.wsgi
