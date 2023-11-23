@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
 import os
 import dj_database_url
+
 if os.path.isfile('env.py'):
     import env
 
@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('my_super@key')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-amyz1ng-login-3xr2iwxmuvs.ws-eu106.gitpod.io']
+ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
 ]
 
 MIDDLEWARE = [
@@ -74,10 +73,17 @@ WSGI_APPLICATION = 'codestar.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("postgres://vpnseqrg:4yYweUlPdI1JDKYDhvW2YsO-KnFo_OEK@flora.db.elephantsql.com/vpnseqrg")),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'vpnseqrg',  # Replace with your database name
+        'USER': 'vpnseqrg',  # Replace with your username
+        'PASSWORD': '4yYweUlPdI1JDKYDhvW2YsO-KnFo_OEK',  # Replace with your actual password
+        'HOST': 'flora.db.elephantsql.com',
+        'PORT': '5432',
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -119,7 +125,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Ensure the following line is properly aligned
-if os.path.isfile('env.py'):
-    import env
